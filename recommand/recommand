@@ -1,0 +1,12 @@
+#!/bin/bash
+echo ' *  start permutation'
+./permutation data/mytops data/mybottoms data/pResult
+rm -f /var/lib/mysql/dressing/result
+echo ' *  fetch data from database'
+mysql -uroot -p12345 < mysqlscript
+echo ' *  fix the data'
+mv /var/lib/mysql/dressing/result data/temp
+cat data/temp | sed 's/\\$//' > data/mysuits_data
+rm data/temp
+
+echo finish
