@@ -8,5 +8,6 @@ echo ' *  fix the data'
 mv /var/lib/mysql/dressing/result data/temp
 cat data/temp | sed 's/\\$//' > data/mysuits_data
 rm data/temp
-
+octave recommand.m
+cat data/myscore | grep '^ 0' | cat -n | sort -k2 -r | head -5 | cut -f1 | sed 's/^ *//'
 echo finish

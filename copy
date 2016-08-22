@@ -1,1 +1,1 @@
-cp /var/www/html/project/* .
+cp -R /var/www/html/project/* .
