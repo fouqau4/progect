@@ -1,18 +1,20 @@
 #!/bin/bash
 echo ' *  start permutation'
-./permutation data/mytops data/mybottoms data/pResult
+./permutation /var/www/html/project/recommand/data/mytops /var/www/html/project/recommand/data/mybottoms /var/www/html/project/recommand/data/pResult
 rm -f /var/lib/mysql/dressing/result
-echo ' *  fetch data from database'
-mysql -uroot -p12345 < mysqlscript
-echo ' *  fix the data'
-mv /var/lib/mysql/dressing/result data/temp
-cat data/temp | sed 's/\\$//' > data/mysuits_data
-rm data/temp
-echo ' *  recommand suits'
-octave recommand.m 
-recommandList=`cat data/myscore | grep '^ 0' | cat -n | sort -k2 -r | head -5 | cut -f1 | sed 'N;N;N;N; s/ //g; y/\n/ /'`
+echo ' *  fetch data from database' 
+mysql -uroot -p12345 < /var/www/html/project/recommand/mysqlscript
+echo ' *  fix the data' 
+mv /var/lib/mysql/dressing/result /var/www/html/project/recommand/data/temp
+cat /var/www/html/project/recommand/data/temp | sed 's/\\$//' > /var/www/html/project/recommand/data/mysuits_data
+rm /var/www/html/project/recommand/data/temp
+echo ' *  recommand suits' 
+octave /var/www/html/project/recommand/recommand.m 
+recommandList=`cat /var/www/html/project/recommand/data/myscore | grep '^ 0' | cat -n | sort -k2 -r | head -5 | cut -f1 | sed 'N;N;N;N; s/ //g; y/\n/ /'`
+rm -f temp_file
 for temp in $recommandList
 	do
-		head -$temp data/pResult | tail -1
+		echo -e "\t" `head -$temp /var/www/html/project/recommand/data/pResult | tail -1` >> temp_file
 	done
-echo ' *  finish'
+echo ' *  finish' 
+echo ' *  show the recommanded result :'
