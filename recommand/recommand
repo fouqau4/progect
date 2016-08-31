@@ -1,6 +1,6 @@
 #!/bin/bash
 echo ' *  start permutation'
-./permutation /var/www/html/project/recommand/data/mytops /var/www/html/project/recommand/data/mybottoms /var/www/html/project/recommand/data/pResult
+./recommand/permutation /var/www/html/project/recommand/data/mytops /var/www/html/project/recommand/data/mybottoms /var/www/html/project/recommand/data/pResult
 rm -f /var/lib/mysql/dressing/result
 echo ' *  fetch data from database' 
 mysql -uroot -p12345 < /var/www/html/project/recommand/mysqlscript
