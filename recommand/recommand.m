@@ -1,5 +1,5 @@
 cd /var/www/html/project/recommand;
-load('parameter/best');
+load('parameter/reverse');
 data = load('data/mysuits_data');
 result = sigmoid( [ ones( size( data, 1 ), 1 ) sigmoid( [ ones( size( data, 1 ), 1 ) data ] * Theta1' ) ] * Theta2' );
-save data/myscore result
+save data/rmyscore result

@@ -10,7 +10,7 @@ cat /var/www/html/project/recommand/data/temp | sed 's/\\$//' > /var/www/html/pr
 rm /var/www/html/project/recommand/data/temp
 echo ' *  recommand suits' 
 octave /var/www/html/project/recommand/recommand.m 
-recommandList=`cat /var/www/html/project/recommand/data/myscore | grep '^ 0' | cat -n | sort -k2 -r | head -5 | cut -f1 | sed 'N;N;N;N; s/ //g; y/\n/ /'`
+recommandList=`cat /var/www/html/project/recommand/data/rmyscore | grep '^ 0' | cat -n | sort -k2 -r | head -5 | cut -f1 | sed 'N;N;N;N; s/ //g; y/\n/ /'`
 rm -f temp_file
 for temp in $recommandList
 	do

@@ -15,6 +15,6 @@
 		echo "<pre>$img</pre>";
 		echo "<img src=\"picture/bottoms/$img.jpg\" width = \"250\" >";
 	}
-//	<img src="picture/bottoms/$img.jpg" >i;
+
 //	chdir('..');
 ?>
