@@ -1,5 +1,5 @@
 <?php
-$con=mysqli_connect('localhost','root','12345','mysql',80);
+$con=mysqli_connect('localhost','root','12345','dressing');
 if ( mysqli_connect_error($con))
 {
     echo "Failed to connect to MySQL : " . mysqli_connect_error();
@@ -10,7 +10,7 @@ else
     $username = $_POST['username'];
     $password = $_POST['password'];
   
-    $sql = 'select * from accountAndPassword';
+    $sql = 'select * from users';
     $result = $con->query($sql);
  
     while($row = mysqli_fetch_assoc($result) )
@@ -23,10 +23,11 @@ else
     }
     if( $noDup )
     {
-        $sql = "INSERT INTO accountAndPassword (account, password) values('{$username}','{$password}')";
+        $sql = "INSERT INTO users (account, password) values('{$username}','{$password}')";
         if ($con->query($sql) === TRUE )
         {
             echo "yes";
+			shell_exec("mkdir -m777 /var/www/html/project/users/$username");
         }
         else
         {

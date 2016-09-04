@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html>
-	<head>
-	</head>
-	<body>
-		<h1>HI</h1>
-		<?
-			echo "haha";
-		?>
-	</body>
-</html>
+<?php
+	shell_exec("mkdir -m777 qq");
+?>
