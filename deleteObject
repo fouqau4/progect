@@ -1,0 +1,10 @@
+#!/bin/bash
+cd /var/www/html/project/users/$1
+objects=$2
+touch temp
+for obj in ${objects}
+do
+	cat wordrobe | sed "/$obj/d" > temp
+	cat temp > wordrobe;
+done
+rm temp
