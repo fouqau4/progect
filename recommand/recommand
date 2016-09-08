@@ -1,20 +1,17 @@
-#!/bin/bash
-echo ' *  start permutation'
-./recommand/permutation /var/www/html/project/recommand/data/mytops /var/www/html/project/recommand/data/mybottoms /var/www/html/project/recommand/data/pResult
-rm -f /var/lib/mysql/dressing/result
-echo ' *  fetch data from database' 
-mysql -uroot -p12345 < /var/www/html/project/recommand/mysqlscript
-echo ' *  fix the data' 
-mv /var/lib/mysql/dressing/result /var/www/html/project/recommand/data/temp
-cat /var/www/html/project/recommand/data/temp | sed 's/\\$//' > /var/www/html/project/recommand/data/mysuits_data
-rm /var/www/html/project/recommand/data/temp
-echo ' *  recommand suits' 
-octave /var/www/html/project/recommand/recommand.m 
-recommandList=`cat /var/www/html/project/recommand/data/rmyscore | grep '^ 0' | cat -n | sort -k2 -r | head -5 | cut -f1 | sed 'N;N;N;N; s/ //g; y/\n/ /'`
-rm -f temp_file
-for temp in $recommandList
-	do
-		echo -e "\t" `head -$temp /var/www/html/project/recommand/data/pResult | tail -1` >> temp_file
-	done
-echo ' *  finish' 
-echo ' *  show the recommanded result :'
+#!/bin/sh
+PATH='/var/www/html/project'
+
+#start permutation'
+$PATH/recommand/permutation $PATH/users/$1/mytops $PATH/users/$1/mybottoms $PATH/users/$1/pResult
+/bin/rm -f /var/lib/mysql/dressing/result
+
+#fetch data from database
+/usr/bin/mysql -uroot -p12345 < $PATH/recommand/mysqlscript
+
+#fix the data 
+/bin/mv /var/lib/mysql/dressing/result $PATH/users/$1/temp
+/bin/cat $PATH/users/$1/temp | /bin/sed 's/\\$//' > $PATH/users/$1/mysuits_data
+/bin/rm $PATH/users/$1/temp
+
+/usr/bin/octave $PATH/recommand/recommand.m 
+$PATH/recommand/showResult myscore_ver2 

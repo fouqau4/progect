@@ -1,3 +1,4 @@
+#!/usr/bin/octave
 %% Machine Learning Online Class - Exercise 4 Neural Network Learning
 
 %  Instructions
@@ -32,7 +33,7 @@ num_labels = 1;          % 10 labels, from 1 to 10
 % Load Training Data
 fprintf('Loading and Visualizing Data ...\n')
 
-X = [ load( 'data/rgood' ); load( 'data/rbad' ) ];
+X = [ load( 'data/good_data' ); load( 'data/bad_ver2_data' ) ];
 y = X( :, end );
 X = X( :, 1 : end -1 );
 m = size( X, 1 );
@@ -103,6 +104,6 @@ pred = predict(Theta1, Theta2, X);
 
 fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
 temp = mean(double(pred==y)) * 100;
-save -append parameter/reverse Theta1 Theta2 temp;
+save -append parameter/nnrecord4 Theta1 Theta2 temp;
 end
 

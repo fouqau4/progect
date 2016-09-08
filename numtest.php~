@@ -1,0 +1,7 @@
+<?php
+    $file_path = "uploads/";
+    $num = shell_exec("cat uploads/sequence");
+    echo ++$num;
+	
+
+?>

@@ -1,0 +1,7 @@
+<?php
+
+	$number = $_POST['number'];//represent which number
+	$totalnum = shell_exec(cat uploads/sequence);
+	$presentnum = $totalnum - $number +1;
+
+?>
