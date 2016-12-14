@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#IFS=","
+#export IFS;
+#words=`cat testdata`
+words=(`cat uploads/clothlist`)
+#remember to ()
+echo  ${words[$1]}
+words[$1]=2;
+echo ${words[*]} 
+

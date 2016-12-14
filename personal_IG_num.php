@@ -1,0 +1,12 @@
+<?php
+	$name = $_POST['name'];
+	$name1 = $name."1";
+	$name2 = $name."2";
+	//echo $name1;
+        shell_exec("ls uploads/[0-9]*_$name.* > $name1");
+	shell_exec(" cat  $name1 | sed 's/uploads\///g' | sort -n > $name2");
+
+	$totalnum = `wc -l $name2 | grep -o "^[0-9]*"`;
+
+	echo $totalnum;
+?>

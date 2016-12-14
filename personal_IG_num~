@@ -1,0 +1,9 @@
+<?php
+	$name = $_post['name'];
+	$name1 = $name.1;
+	$name2 = $name.2;
+        shell_exec("ls uploads/[0-9]*_$name.jpg > $name1");
+	shell_exec(" cat  $name1 | sed 's/uploads\///g | sort -n > $name2");
+	$backnum = shell_exec("tail -$num $name2");
+	echo "http://140.117.169.42/project/uploads/".$backnum;
+?>

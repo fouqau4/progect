@@ -3,6 +3,7 @@ PATH='/var/www/html/project'
 
 #start permutation'
 $PATH/recommand/permutation $PATH/users/$1/mytops $PATH/users/$1/mybottoms $PATH/users/$1/pResult
+#$PATH/recommand/permutation $PATH/mytops $PATH/users/mybottoms $PATH/users/pResult
 /bin/rm -f /var/lib/mysql/dressing/result
 
 #fetch data from database
@@ -13,5 +14,6 @@ $PATH/recommand/permutation $PATH/users/$1/mytops $PATH/users/$1/mybottoms $PATH
 /bin/cat $PATH/users/$1/temp | /bin/sed 's/\\$//' > $PATH/users/$1/mysuits_data
 /bin/rm $PATH/users/$1/temp
 
-/usr/bin/octave $PATH/recommand/recommand.m 
-$PATH/recommand/showResult myscore_ver2 
+#calculate score
+/usr/bin/octave $PATH/recommand/recommand.m $1 
+$PATH/recommand/showResult $1

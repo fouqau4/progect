@@ -1,0 +1,18 @@
+#!/bin/bash
+# load the next existed number
+#filename=`ls uploads/ | grep -ow "$1\_.*\.jpg"`;
+
+#echo $filename;
+cloth_list=(`cat uploads/clothlist`)
+last_num=`cat uploads/lastnum`
+#no space left nearby the = 
+for(( i =$last_num;i>=1;i--))
+do
+	filename=`ls uploads/ | grep -ow -e "$i\_.*\.jpg"` -ow -e "$i\_.*\.png";
+	#picpath="/var/www/html/project/uploads/$filename";
+	if [ -f $picpath ]; then 
+	   echo $filename ;
+	   #break;
+	fi
+done
+

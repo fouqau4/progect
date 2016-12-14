@@ -1,0 +1,4 @@
+use dressing;
+set @allObj = load_file( @path );
+select @allObj;
+

@@ -1,0 +1,6 @@
+<?php
+
+	$totalnum = `cat uploads/sequence`;
+	echo -n $totalnum;
+
+?>

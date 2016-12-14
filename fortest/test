@@ -1,0 +1,7 @@
+#!/bin/bash
+filename="apple" 
+exec < $filename 
+while read var 
+do 
+ echo $var 
+done

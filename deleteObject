@@ -1,10 +1,12 @@
 #!/bin/bash
 cd /var/www/html/project/users/$1
-objects=$2
+
+del=(`echo $2`)
+
 touch temp
-for obj in ${objects}
+for obj in "${del[@]}"
 do
-	cat wardrobe | sed "/$obj/d" > temp
+	cat wardrobe | sed "/^$obj$/d" > temp
 	cat temp > wardrobe;
 done
 rm temp

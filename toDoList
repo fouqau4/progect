@@ -1,0 +1,42 @@
+mysql 參數處理
+drop procedure divideObj;
+delimiter //
+create procedure divideObj( wardrobe text )
+begin
+    declare temp_i int;
+    declare input text;
+    declare size int;
+    declare tops text;
+    declare Type int;
+    declare bottoms text;
+    set tops = "";
+    set bottoms = "";
+    set input = load_file( wardrobe );
+    set size = length( wardrobe );
+    set temp_i = 0;
+    label1: loop
+    set temp_i = temp_i + 1;
+    set @current_line = which_line( input, temp_i );
+    if length( @current_line ) = 0 then
+        leave label1;
+    end if;
+    set size = size - length( @current_line ) - 1;
+	select @current_line;
+	select type from objects where id = @current_line ;
+    if Type = 1 then
+        set tops = concat( tops,"\n", @current_line );
+    else
+        if Type = 4 then
+            set bottoms = concat( bottoms, "\n", @current_line );
+        end if;
+    end if;
+    if size = 0 then
+        leave label1;
+    end if;
+    iterate label1;
+    end loop label1;
+    select tops;
+    select bottoms;
+end;//
+delimiter ;
+call divideObj( "/var/www/html/project/users/cube/wardrobe" );

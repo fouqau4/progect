@@ -1,0 +1,30 @@
+/*
+PHP 圖片壓縮+轉檔
+*/
+ <?php
+$file ="2_arishen.jpg";
+$quality = 30;
+ 
+switch (exif_imagetype($file)) {
+ 
+    case IMAGETYPE_PNG :
+        $img = imagecreatefrompng($file);
+        break;
+    case IMAGETYPE_JPEG :
+        $img = imagecreatefromjpeg($file);
+        break;
+    default:
+        throw new InvalidArgumentException("錯誤發生");
+        exit();
+        break;
+}
+ 
+@imagejpeg($img, $file, $quality);
+ 
+//印在畫面上
+//header('Content-Type: image/jpeg');
+//@imagejpeg($img, NULL, $quality);
+ 
+//釋放記憶體
+@imagedestroy($img);
+?>

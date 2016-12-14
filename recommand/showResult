@@ -1,7 +1,8 @@
 #!/bin/bash
-recommandList=`/bin/cat /var/www/html/project/recommand/data/$1 | /bin/grep '^ 0' | /bin/cat -n | /usr/bin/sort -k2 -r | /usr/bin/cut -f1`
+PATH="/var/www/html/project/users"
+recommandList=`/bin/cat $PATH/$1/myscore | /bin/grep '^ 0' | /bin/cat -n | /usr/bin/sort -k2 -r | /usr/bin/cut -f1`
 /bin/rm -f temp_file
 for temp in $recommandList
     do
-        echo `/usr/bin/head -$temp /var/www/html/project/recommand/data/pResult | /usr/bin/tail -1`
+        echo `/usr/bin/head -$temp $PATH/$1/pResult | /usr/bin/tail -1`
     done
